@@ -47,7 +47,7 @@ while True:
             appleconsumestat = False
         else:
             pass
-        
+    
         for i in range(snakelen-1,0,-1):
             snakecoords[i][0] = snakecoords[i-1][0]
             snakecoords[i][1] = snakecoords[i-1][1]
