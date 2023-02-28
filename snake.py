@@ -79,7 +79,7 @@ while True:
                 appleconsumestat = True
                 score += 1
 
-        
+
         #print(f'{x}x, {y}y')
 
         window.fill((20, 20, 50))
