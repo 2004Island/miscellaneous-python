@@ -109,7 +109,7 @@ while True:
             y = -1 * velocity
             score = 0
             game_active = True
-    
+
     # draw to the screen
     pygame.display.update()
     clock.tick(16)
