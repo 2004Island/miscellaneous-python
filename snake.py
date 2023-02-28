@@ -13,8 +13,8 @@ x = 0
 y = 0 
 
 food = pygame.Rect(150, 150, 8, 8)
-snakecoords = [[240, 400]]
-snakelen = 3
+snakecoords = [[400, i*16 + 240] for i in range(0,3)]
+snakelen = len(snakecoords)
 pixel_font = pygame.font.Font('font/Pixeltype.ttf', 50)
 
 while True:
@@ -41,12 +41,12 @@ while True:
             x = 0
         
         if snakecoords[0][1] - y > 0 and snakecoords[0][1] + y < (480-16):
-            snakecoords[0][1] += y
+            pass
         else:
             game_active = False
 
         if snakecoords[0][0] - x > 0 and snakecoords[0][0] + x < (800-16):
-            snakecoords[0][0] += x
+            pass
         else:
             game_active = False
         
@@ -54,8 +54,16 @@ while True:
 
         window.fill((20, 20, 50))
 
-        for i in range(snakelen):
-            pygame.draw.rect(window, (0, 200, 0), pygame.Rect(snakecoords[0][0] + (i*x), snakecoords[0][1] + (i*y), 16, 16))
+        for i in range(snakelen-1,0,-1):
+            snakecoords[i][0] = snakecoords[i-1][0]
+            snakecoords[i][1] = snakecoords[i-1][1]
+
+        snakecoords[0][0] += x
+        snakecoords[0][1] += y
+
+        [pygame.draw.rect(window, (0, 200, 100), pygame.Rect(snakecoords[i][0], snakecoords[i][1], 16, 16)) for i in range(0,snakelen)]
+        
+        print(snakecoords)
 
     else:
         window.fill((50, 20, 20))
@@ -68,8 +76,7 @@ while True:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_SPACE]:
-            snakecoords[0][1] = 240
-            snakecoords[0][0] = 400
+            snakecoords = [[400, i*16 + 240] for i in range(0,3)]
             game_active = True
     
     # draw to the screen
